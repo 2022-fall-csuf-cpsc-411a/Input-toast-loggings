@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">input, toast, loggings</string>
+    <string name="clicked_message"> Clicked ! </string>
+    <string name="long_pressed_message"> Long Pressed ! </string>
+    <string name="short_toast_message"> What it do ? </string>
+    <string name="long_toast_message"> SUDDENLY ! </string>
 </resources>
