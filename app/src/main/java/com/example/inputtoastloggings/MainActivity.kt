@@ -1,10 +1,12 @@
 package com.example.inputtoastloggings
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageSwitcher
 import android.widget.SeekBar
+import android.widget.Switch
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var thirdButton: Button
 
     private lateinit var mainTextEdit: EditText
+
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var mainSwitch: Switch
     private lateinit var mainSeek: Seekbar
 
@@ -57,14 +61,14 @@ class MainActivity : AppCompatActivity() {
             val btn: Button = (v as Button)
             btn.text = this.getString(R.string.clicked_message)
 
-            if ( this.switchPosition ) {
-                Log.i(LOG_TAG_BUTTON, msg: "Make button 1 Toast !")
-//                println("Make button 1 Toast !")
-                Toast.makeText(context: this, this.getString(R.string.short_toast_message), Toast.LENGTH_SHORT).show()
-            }
+//            if ( this.switchPosition ) {
+//                Log.i(LOG_TAG_BUTTON, msg: "Make button 1 Toast !")
+////                println("Make button 1 Toast !")
+//                Toast.makeText(context: this, this.getString(R.string.short_toast_message), Toast.LENGTH_SHORT).show()
+//            }
 
-                Log.i(LOG_TAG_BUTTON, msg: "First button was clicked")
-//            println("First button was clicked")
+//                Log.i(LOG_TAG_BUTTON, msg: "First button was clicked")
+            println("First button was clicked")
 
         }
 
@@ -79,25 +83,26 @@ class MainActivity : AppCompatActivity() {
             val btn: Button = (v as Button)
             btn.text = this.getString(R.string.long_pressed_message)
 
-            if ( this.switchPosition ) {
-                println("Make button 1 Toast !")
-                Toast.makeText(context: this, this.getString(R.string.long_toast_message), Toast.LENGTH_LONG).show()
-            }
+//            if ( this.switchPosition ) {
+//                println("Make button 1 Toast !")
+//                Toast.makeText(context: this, this.getString(R.string.long_toast_message), Toast.LENGTH_LONG).show()
+//            }
 
             println("A button was long pressed")
             true
         }
 
-        this.secondButton.setOnClickListener(butonClickListener)
-        this.secondButton.setOnLongClickListener(butonClickListener)
-        this.thirdButton.setOnClickListener(butonClickListener)
-        this.thirdButton.setOnLongClickListener(butonClickListener)
+        this.secondButton.setOnClickListener(buttonClickListener)
+        this.secondButton.setOnLongClickListener(buttonClickListener)
+        this.thirdButton.setOnClickListener(buttonClickListener)
+        this.thirdButton.setOnLongClickListener(buttonClickListener)
     }
 
+
     private fun setupTextCallbacks() {
-        this.mainTextEdit.setOnKeyListener { v: View, k: Int, event: KeyEvent ->
-            Boolean
-            println("Text key press was detected!: $k :: ")
+        this.mainTextEdit.setOnKeyListener { v: View, k: Int, event: KeyEvent -> Boolean
+
+            println("Text key press was detected!: $k :: $event")
             false
         }
     }
@@ -110,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private fun setupSwitchCallbacks() {
 
         this.mainSwitch.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
@@ -131,6 +136,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rememberSwitchPosition() {
-        this.switchPosition =
+//        this.switchPosition =
     }
 }
