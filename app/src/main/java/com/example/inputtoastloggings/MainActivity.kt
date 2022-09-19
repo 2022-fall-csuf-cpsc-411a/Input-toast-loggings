@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firstButton: Button
     private lateinit var secondButton: Button
     private lateinit var thirdButton: Button
-
     private lateinit var mainTextEdit: EditText
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -38,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         this.setupTextCallbacks()
         this.setupSwitchCallbacks()
         this.setupSeekBarCallbacks()
+
+        this.switchPosition = this.mainSwitch.isChecked
     }
 
     fun connectViews() {
@@ -61,13 +62,13 @@ class MainActivity : AppCompatActivity() {
             val btn: Button = (v as Button)
             btn.text = this.getString(R.string.clicked_message)
 
-//            if ( this.switchPosition ) {
-//                Log.i(LOG_TAG_BUTTON, msg: "Make button 1 Toast !")
-////                println("Make button 1 Toast !")
-//                Toast.makeText(context: this, this.getString(R.string.short_toast_message), Toast.LENGTH_SHORT).show()
-//            }
+            if ( this.switchPosition ) {
+                Log.i(LOG_TAG_BUTTON, msg: "Make button 1 Toast !")
+//                println("Make button 1 Toast !")
+                Toast.makeText(context: this, R.string.toast_text_1, Toast.LENGTH_SHORT).show()
+            }
 
-//                Log.i(LOG_TAG_BUTTON, msg: "First button was clicked")
+                Log.i(LOG_TAG_TEXT, msg: "First button was clicked")
             println("First button was clicked")
 
         }
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             println("A button was clicked")
         }
 
-        val buttonLongPressedListener = View.OnLongClickListener { v: View ->
+        val buttonLongPressListener = View.OnLongClickListener { v: View ->
             val btn: Button = (v as Button)
             btn.text = this.getString(R.string.long_pressed_message)
 
@@ -88,14 +89,20 @@ class MainActivity : AppCompatActivity() {
 //                Toast.makeText(context: this, this.getString(R.string.long_toast_message), Toast.LENGTH_LONG).show()
 //            }
 
+            if ( this.switchPosition ) {
+//                Log.i(LOG_TAG_BUTTON, msg: "Make button 1 Toast !")
+                println("Make button 1 Toast !")
+                Toast.makeText(context: this, R.string.toast_text_long, Toast.LENGTH_LONG).show()
+            }
+
             println("A button was long pressed")
             true
         }
 
         this.secondButton.setOnClickListener(buttonClickListener)
-        this.secondButton.setOnLongClickListener(buttonClickListener)
+        this.secondButton.setOnLongClickListener(buttonLongPressListener)
         this.thirdButton.setOnClickListener(buttonClickListener)
-        this.thirdButton.setOnLongClickListener(buttonClickListener)
+        this.thirdButton.setOnLongClickListener(buttonLongPressListener)
     }
 
 
@@ -107,16 +114,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //
-    private fun setupSeekBarCallbacks() {
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private fun setupSwitchCallbacks() {
+
         this.mainSwitch.setOnClickListener { v: View ->
             val sw: Switch = ( v as Switch )
-            println("Text key press was detected!: ${sw.isChecked}")
+            this.switchPosition = sw.isChecked
+            println("Switch was clicked to: ${sw.isChecked}")
         }
     }
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private fun setupSwitchCallbacks() {
+    private fun setupSeekBarCallbacks() {
 
         this.mainSwitch.setOnSeekBarChangeListener( object: SeekBar.OnSeekBarChangeListener {
 
@@ -130,12 +139,12 @@ class MainActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(p0: seekBar?) {}
 
             // TODO: Implement this other thing
-            override fun onStartTrackingTouch(p0: seekBar?) {}
+            override fun onStopTrackingTouch(p0: seekBar?) {}
 
         })
     }
-
-    private fun rememberSwitchPosition() {
+//
+//    private fun rememberSwitchPosition() {
 //        this.switchPosition =
-    }
+//    }
 }
